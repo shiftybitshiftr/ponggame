@@ -2,10 +2,10 @@
 #include <iostream>
 #include <Windows.h>
 #include <conio.h>
-#include "Source.cpp"
 #include <sstream>
 #include <fstream>
 #include <iostream>
+//#include "Source.cpp"
 
 using namespace std;
 
@@ -23,7 +23,6 @@ GameControl::GameControl()
 	}
 }
 
-
 GameControl::~GameControl()
 {
 }
@@ -32,8 +31,8 @@ GameControl::~GameControl()
 void GameControl::start()
 {
 
-	char paddle = 219;
-	char ball = 254;
+	const char paddle = 219;
+	const char ball = 254;
 
 	//values to ensure the paddle does not move offscreen
 	int index;
@@ -226,4 +225,27 @@ void GameControl::sortLB()
 		}
 		leaderboard[j + 1] = key;
 	}
+}
+
+void GameControl::gotoxy(int x, int y) {
+
+	COORD pos = { x, y };
+
+	HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	SetConsoleCursorPosition(output, pos);
+
+}
+
+int GameControl::wherex()
+{
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+	return csbi.dwCursorPosition.X;
+}
+int GameControl::wherey()
+{
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+	return csbi.dwCursorPosition.Y;
 }

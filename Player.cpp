@@ -1,5 +1,8 @@
 #include "Player.h"
-#include "Source.cpp"
+#include <iostream>
+
+using namespace std;
+//#include "Source.cpp"
 
 extern void PlaceCursor(const int x, const int y);
 

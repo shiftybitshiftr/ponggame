@@ -1,6 +1,7 @@
 #pragma once
 #include "Bot.h"
-#include <vector>;
+#include <vector>
+
 class GameControl
 {
 public:
@@ -16,6 +17,10 @@ public:
 	void start();
 
 	void sortLB();
+
+	void gotoxy(int x, int y);
+	int wherex();
+	int wherey();
 
 private:
 	Bot bender;

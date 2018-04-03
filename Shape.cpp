@@ -1,7 +1,5 @@
 #include "Shape.h"
 
-
-
 Shape::Shape()
 {
 	x = 0;

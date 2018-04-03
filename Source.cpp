@@ -1,5 +1,3 @@
-
-
 #include "GameControl.h"
 #include "Ball.h"
 #include "Bot.h"
@@ -30,7 +28,6 @@ int main()
 	gameTitle();
 	pongArt();
 	gameMenu(GC);
-	
 
 	system("Pause");
 	return 0;
@@ -161,28 +158,4 @@ void gameTitle()
 		SetConsoleTextAttribute(hConsole, k);
 		cout << "PONG MASTER DELUXE SUPER TRIPLE DELUXE MASTER EDITION VOLUME 17" << endl;
 	}
-}
-
-
-void gotoxy(int x, int y) {
-
-	COORD pos = { x, y };
-
-	HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	SetConsoleCursorPosition(output, pos);
-
-}
-
-int wherex()
-{
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-	return csbi.dwCursorPosition.X;
-}
-int wherey()
-{
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-	return csbi.dwCursorPosition.Y;
 }
