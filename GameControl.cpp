@@ -1,4 +1,6 @@
 #include "GameControl.h"
+#include "Player.h"
+#include "Ball.h"
 #include <iostream>
 #include <Windows.h>
 #include <conio.h>
@@ -27,15 +29,22 @@ GameControl::~GameControl()
 {
 }
 
+//move player with switch statement then move bot then move ball and display function at the end then check for win
 //function called when user chooses to start playing the actual game
+
 void GameControl::start()
 {
-
+	
 	const char paddle = 219;
 	const char ball = 254;
+	Ball myBall;
+	Player myPlayer;
+	Bot myBot;
+	myBall.setXandY(40,11);
+		//22 by 80 is the shape of the box
 
 	//values to ensure the paddle does not move offscreen
-	int index;
+	int index=0;
 	const int scrBottom = 45;
 
 	//values to catch position of cursor
@@ -48,7 +57,7 @@ void GameControl::start()
 
 	//check user input
 	input = _getch();
-
+	//one loop which calls the player move function and computer move function and display function
 	//while loop to continue running unless escape is pressed
 	while (check == true)
 	{
@@ -111,11 +120,30 @@ void GameControl::start()
 			}
 			break;
 
+			
+
 		default:
 			break;
 		}
+
+		myPlayer.setY(posy);
+
+		DisplayGame(posx, posy);
+
+		myBall.WinCondition(myPlayer, myBot);
 	}
 }
+
+
+void GameControl::DisplayGame(int posx, int posy)
+{
+	system("CLS");
+
+	//start drawing player which just moved
+	//start drawing ball which just moved
+}
+
+
 
 //function to load the leaderboard, call this function at the beginning of every game to load the leaderboard list primarily and to show user potential goal to achieve
 void GameControl::loadLeaderB()

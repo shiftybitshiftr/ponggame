@@ -26,7 +26,7 @@ int main()
 	//system("Pause");
 	GameControl GC;
 	gameTitle();
-	pongArt();
+	//pongArt();
 	gameMenu(GC);
 
 	system("Pause");
@@ -105,7 +105,7 @@ extern void PlaceCursor(const int x, const int y)
 	return;
 }
 
-void pongArt()
+/*void pongArt()
 {
 	HANDLE  hConsole;
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -130,7 +130,7 @@ void pongArt()
 	cout << "       PPPPPPPPPP               OOOOOOOOO     NNNNNNNN         NNNNNNN        GGGGGG   GGGG" << endl;
 
 	Sleep(1500);
-}
+}*/
 
 void gameTitle()
 {

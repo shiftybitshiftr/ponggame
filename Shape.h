@@ -2,12 +2,7 @@
 class Shape
 {
 public:
-	Shape()
-	{
-		x = 0;
-		y = 0;
-		color = 0;
-	}
+	Shape();
 	~Shape();
 
 	virtual int speed() = 0;
@@ -16,7 +11,7 @@ public:
 
 	virtual void collisionDetect(int xCo, int yCo) = 0;
 
-private:
+protected:
 	int x , y;
 	int color;
 

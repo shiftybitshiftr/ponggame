@@ -4,6 +4,7 @@
 class Player :
 	public Shape
 {
+	friend class Ball;
 public:
 	Player();
 	~Player();
@@ -14,5 +15,6 @@ public:
 
 	void collisionDetect(int xCo, int yCo);
 
+	void setY(int y);
 };
 

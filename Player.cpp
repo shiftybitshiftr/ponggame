@@ -19,7 +19,10 @@ void Player::collisionDetect(int xCo, int yCo)
 {
 
 }
-
+void Player::setY(int yVal)
+{
+	y = yVal;
+}
 void Player::draw(int x, int y)
 {
 	char paddle = 219;
@@ -31,3 +34,4 @@ void Player::draw(int x, int y)
 	cout << paddle << endl;
 
 }
+

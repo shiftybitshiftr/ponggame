@@ -1,9 +1,11 @@
 #pragma once
 #include "Shape.h"
+#include <iostream>
 
 class Bot :
 	public Shape
 {
+	friend class Ball;
 public:
 	Bot();
 	~Bot();
@@ -18,6 +20,6 @@ public:
 
 	void collisionDetect(int xCo, int yCo);
 
-
+	
 };
 

@@ -18,6 +18,8 @@ public:
 
 	void sortLB();
 
+	void DisplayGame(int x, int y);
+
 	void gotoxy(int x, int y);
 	int wherex();
 	int wherey();
