@@ -20,6 +20,12 @@ public:
 
 	void collisionDetect(int xCo, int yCo);
 
+	void moveBot(int yn);
+
+private:
+
+	int posX;
+	int posY;
 	
 };
 
