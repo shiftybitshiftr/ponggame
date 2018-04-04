@@ -37,7 +37,7 @@ int Bot::speed()
 	return 0;
 }
 
-void Bot::difficulty(int a)
+void Bot::difficulty(int a) //Set movement patterns for bot difficulty
 {
 	//Default difficulty of 1
 	if (a == 1)
@@ -54,7 +54,7 @@ void Bot::difficulty(int a)
 	
 	else if( a == 2)
 	{
-		//bot speed "doubles"
+		//Difficulty level 2
 		moveBot(15);
 		moveBot(26);
 		moveBot(0);
@@ -65,7 +65,7 @@ void Bot::difficulty(int a)
 	
 	else if( a == 3);
 	{
-		//bot speed "triples"
+		//Difficulty level 3
 		moveBot(6);
 		moveBot(16);
 		moveBot(6);
@@ -79,7 +79,7 @@ void Bot::difficulty(int a)
 	
 	else( a ==4);
 	{
-		//bot speed "quadruples"
+		//Difficulty level 4 Hard Mode
 		moveBot(20);
 		moveBot(10);
 		moveBot(15);
