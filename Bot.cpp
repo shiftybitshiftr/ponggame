@@ -43,13 +43,13 @@ void Bot::difficulty(int a)
 	if (a == 1)
 	{
 		//first command to go to bottom of gameplay area
-		moveBot(4);
+		moveBot(0);
 		moveBot(26);
-		moveBot(4);
+		moveBot(0);
 		moveBot(15);
 		moveBot(26);
 		moveBot(15);
-		moveBot(4);
+		moveBot(0);
 	}
 	
 	else if( a == 2)
@@ -57,11 +57,12 @@ void Bot::difficulty(int a)
 		//bot speed "doubles"
 		moveBot(15);
 		moveBot(26);
-		moveBot(4);
+		moveBot(0);
 		moveBot(7);
 		moveBot(20);
 		moveBot(15);
 	}
+	
 	else if( a == 3);
 	{
 		//bot speed "triples"
@@ -69,12 +70,13 @@ void Bot::difficulty(int a)
 		moveBot(16);
 		moveBot(6);
 		moveBot(16);
-		moveBot(4);
+		moveBot(0);
 		moveBot(26);
 		moveBot(15);
-		moveBot(4);
+		moveBot(0);
 		moveBot(16);
 	}
+	
 	else( a ==4);
 	{
 		//bot speed "quadruples"
@@ -84,7 +86,7 @@ void Bot::difficulty(int a)
 		moveBot(8);
 		moveBot(22);
 		moveBot(15);
-		moveBot(4);
+		moveBot(0);
 		moveBot(15);
 		moveBot(20);
 		moveBot(10);
