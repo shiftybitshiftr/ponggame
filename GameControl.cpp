@@ -139,8 +139,10 @@ void GameControl::DisplayGame(int posx, int posy)
 {
 	system("CLS");
 
-	//start drawing player which just moved
+	//start drawing player + bot which just moved
 	//start drawing ball which just moved
+	//draw border
+	//30 by 120
 }
 
 
