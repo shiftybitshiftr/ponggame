@@ -77,7 +77,7 @@ void Bot::difficulty(int a) //Set movement patterns for bot difficulty
 		moveBot(16);
 	}
 	
-	else( a ==4);
+	else( a == 4);
 	{
 		//Difficulty level 4 Hard Mode
 		moveBot(20);
@@ -92,11 +92,24 @@ void Bot::difficulty(int a) //Set movement patterns for bot difficulty
 		moveBot(10);
 	}
 	
+	if(a < 1)
+		{
+		cout << "Incorrect Difficulty setting \n";
+		cout << "Please enter another Difficulty setting imbetween 1-4\n";
+		options();
+		}
+	
+	if(a > 4)
+		{
+		cout << "Incorrect Difficulty setting \n";
+		cout << "Please choose a Difficulty between 1 and 4\n";
+		options();
+		}
 }
 
 void Bot::tracking(int x, int y)
 {
-
+	
 }
 
 void Bot::collisionDetect(int xCo, int yCo)
