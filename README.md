@@ -1,6 +1,6 @@
 # PONG MASTER DELUXE SUPER TRIPLE DELUXE MASTER EDITION VOLUME 17 OF THE PONG BIBLICAL TRILOGY NUMBER 2: ELECTRIC BOOGALOO 
 
-A C++ based Pong derivative for Windows using multi-threading
+Pong for Windows written in C++
 
 Functionality:
 
