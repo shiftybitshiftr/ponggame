@@ -3,7 +3,7 @@
 Pong for Windows written in C++
 
 
-![Aw yeah](https://github.com/michaelfischler/ponggame/blob/master/pong.png)
+![Aw yeah](https://github.com/michaelfischler/ponggame/blob/master/pong_demo.png)
 
 
 Functionality:
