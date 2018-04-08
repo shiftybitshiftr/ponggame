@@ -156,16 +156,17 @@ void GameControl::start()
 	cout << vict;
 	SetColor(10);
 	cout << " wins!\n\n\n\n\n\n\n\n\n\n\n\n\n" << endl;
-	system("pause");
+	Sleep(1500);
+	//system("pause");
 
 	while (check == true)
 	{
-		checkKey = _getch();
-		//checks if escape key was pressed
-		if (checkKey == 27)
-		{
-			break;
-		}
+		//checkKey = _getch();
+		////checks if escape key was pressed
+		//if (checkKey == 27)
+		//{
+		//	break;
+		//}
 
 		srand(time(NULL)); 
 		ballDir = (rand() % 4) + 1; // seed for random ball starting direction
@@ -198,7 +199,7 @@ void GameControl::start()
 			DisplayGame(*myBall, *myPlayer, *myBot, ballX, ballY);
 
 			// check if someone has scored, 0 = nobody, 1 = player, 2 = bot
-			winner = checkWinCondition(*myBall);
+			winner = checkWinCondition(myBall->getX());
 
 			//consider flushing user input stream here
 
@@ -274,15 +275,15 @@ void GameControl::start()
 	}
 }
 
-int GameControl::checkWinCondition(Ball myBall)
+int GameControl::checkWinCondition(int xCord)
 {
-	if (myBall.x == 0) // player scored
-	{
-		return 1;
-	}
-	if (myBall.x == 79) // computer scored
+	if (xCord == 79) // computer scored
 	{
 		return 2;
+	}
+	if (xCord == 0) // player scored
+	{
+		return 1;
 	}
 	else
 	{

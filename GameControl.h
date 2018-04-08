@@ -21,7 +21,7 @@ public:
 
 	void DisplayGame(Ball myBall, Player myPlayer, Bot myBot, int x, int y);
 
-	int checkWinCondition(Ball myBall);
+	int checkWinCondition(int xCord);
 
 	void gotoxy(int x, int y);
 	int wherex();

@@ -25,7 +25,6 @@ extern void printArt(string fileName);
 int main()
 {
 	GameControl GC;
-	system("pause");
 	gameTitle();
 	pongArt();
 	gameMenu(GC);
