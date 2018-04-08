@@ -4,6 +4,7 @@
 #include <iostream>
 #include <Windows.h>
 #include <conio.h>
+#include <time.h>
 #include <sstream>
 #include <fstream>
 #include <iostream>
@@ -11,13 +12,16 @@
 
 using namespace std;
 
+extern void SetColor(int);
 extern void PlaceCursor(const int x, const int y);
+extern void printArt(string fileName);
 
 
 GameControl::GameControl()
 {
-	vict = 10;
-	score = 0;
+	vict = 3;
+	playerScore = 0;
+	botScore = 0;
 
 	for (int i = 0; i < 11;i++)
 	{
@@ -34,117 +38,289 @@ GameControl::~GameControl()
 
 void GameControl::start()
 {
-	
-	const char paddle = 219;
-	const char ball = 254;
-	Ball myBall;
-	Player myPlayer;
-	Bot myBot;
-	myBall.setXandY(40,11);
-		//22 by 80 is the shape of the box
+	//system("CLS");
+
+	//myBall.setXandY(60,15);
+		//22 by 80 is the shape of the box on Win7
+		//30 by 120 is shape of box on Win8-10
 
 	//values to ensure the paddle does not move offscreen
-	int index=0;
-	const int scrBottom = 45;
+	//int index=0;
+	//const int scrBottom = 45;
 
 	//values to catch position of cursor
-	int posx = 0;
-	int posy = 0;
+	//int posx = 0;
+	//int posy = 0;
 	//value to hold user input
-	int input;
+	//int input;
 	//boolean value to check whether end program button was pressed and exit program
-	bool check = true;
+	//bool check = true;
 
 	//check user input
-	input = _getch();
+	//input = _getch();
 	//one loop which calls the player move function and computer move function and display function
 	//while loop to continue running unless escape is pressed
+	//while (check == true)
+	//{
+	//	//checks that escape key was not pressed
+	//	if (input == 27)
+	//	{
+	//		break;
+	//	}
+
+	//	//switch statement to check what user input
+	//	switch (_getch()) {
+
+	//		//user pressed down arrow key
+	//	case 80:
+
+	//		//makes sure the cursor doesnt go out of bounds in the array
+	//		if (index < scrBottom && index > 0)
+	//		{
+	//			//move on the array of linked lists
+	//			index++;
+
+	//			//moves stored position of cursor downward 1 unit
+	//			posy = wherey() + 1;
+
+
+	//			if (index < scrBottom && index > 0)
+	//			{
+	//				gotoxy(posx, posy);
+	//			}
+	//			else {
+	//				index--;
+
+	//				//moves stored position of cursor downward 1 unit. This fixes the previous move if the paddle was moved out of bounds
+	//				posy = wherey() - 1;
+	//			}
+	//		}
+	//		break;
+
+	//		//user pressed up arrow key
+	//	case 72:
+	//		//makes sure the cursor doesnt go out of bounds in the array
+	//		if (index < scrBottom && index > 0)
+	//		{
+	//			//move on the array of linked lists
+	//			index--;
+
+	//			//moves stored position of cursor upward 1 unit
+	//			posy = wherey() - 1;
+
+	//			if (index < scrBottom && index > 0)
+	//			{
+	//				gotoxy(posx, posy);
+	//			}
+	//			else {
+	//				index++;
+
+	//				//moves stored position of cursor downward 1 unit. This fixes the previous move if the paddle was moved out of bounds
+	//				posy = wherey() + 1;
+	//			}
+	//		}
+	//		break;
+
+	//		
+
+	//	default:
+	//		break;
+	//	}
+
+	//	myPlayer.setY(posy);
+
+	//	DisplayGame(posx, posy);
+
+	//	myBall.WinCondition(myPlayer, myBot);
+	//}
+
+	const char paddle = 219;
+	const char ball = 254;
+	Ball *myBall = new Ball();
+	Player *myPlayer = new Player();
+	Bot *myBot = new Bot();
+
+	//boolean value to check whether end program button was pressed and exit program
+	bool check = true;
+	char checkKey = 0;
+
+	int winner = 0, ballDir, ballX, ballY;
+
+	system("mode 80"); // ensure console width is large enough
+	system("CLS");
+
+	// print how many points required to win
+	PlaceCursor(30, 11);
+	cout << "First to ";
+	SetColor(0x0D);
+	cout << vict;
+	SetColor(10);
+	cout << " wins!\n\n\n\n\n\n\n\n\n\n\n\n\n" << endl;
+	system("pause");
+
 	while (check == true)
 	{
-		//checks that escape key was not pressed
-		if (input == 27)
+		checkKey = _getch();
+		//checks if escape key was pressed
+		if (checkKey == 27)
 		{
 			break;
 		}
 
-		//switch statement to check what user input
-		switch (_getch()) {
+		srand(time(NULL)); 
+		ballDir = (rand() % 4) + 1; // seed for random ball starting direction
 
-			//user pressed down arrow key
-		case 80:
+		srand(time(NULL));
+		ballY = (rand() % 10) + 6; // seed for random ball starting posY
 
-			//makes sure the cursor doesnt go out of bounds in the array
-			if (index < scrBottom && index > 0)
+		srand(time(NULL));
+		ballX = (rand() % 20) + 31; // seed for random ball starting posX
+
+		myBall->setXandYandDir(ballX, ballY, ballDir);
+		DisplayGame(*myBall, *myPlayer, *myBot, ballX, ballY); // print game board
+		myPlayer->setInput(_getch()); // accept user input
+
+		while (1)
+		{
+			// probably use these variables instead of directly calling inside each move function. it's hard to understand whats going on in there.
+			//int ballX = myBall.getX();
+			//int ballY = myBall.getY();
+			//int ballDir = myBall.getDir();
+			//int playerY = myPlayer.getY();
+			//int botY = myBot.getY();
+
+			// move player, ball, and bot
+			myPlayer->movePlayer();
+			myBot->move(myBall->getX(), myBall->getY(), myBall->getDir()); // passing position and direction of ball
+			myBall->moveBall(myPlayer->getY(), myBot->getY());             // passing position of player and bot
+
+			// print updated positions
+			DisplayGame(*myBall, *myPlayer, *myBot, ballX, ballY);
+
+			// check if someone has scored, 0 = nobody, 1 = player, 2 = bot
+			winner = checkWinCondition(*myBall);
+
+			//consider flushing user input stream here
+
+			if (winner != 0) // triggered if some scored a point
 			{
-				//move on the array of linked lists
-				index++;
+				//and here
 
-				//moves stored position of cursor downward 1 unit
-				posy = wherey() + 1;
-
-
-				if (index < scrBottom && index > 0)
+				if (winner == 1)
 				{
-					gotoxy(posx, posy);
+					// add 1 to player score
+					playerScore++;
+
+					// print "PLAYER SCORED !" 
+					system("CLS");
+					SetColor(0x0B);
+					PlaceCursor(0, 7);
+					printArt("pScore.txt");
+					cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n";
+					SetColor(10);
+					Sleep(1500);
+					//system("pause");
 				}
-				else {
-					index--;
-
-					//moves stored position of cursor downward 1 unit. This fixes the previous move if the paddle was moved out of bounds
-					posy = wherey() - 1;
-				}
-			}
-			break;
-
-			//user pressed up arrow key
-		case 72:
-			//makes sure the cursor doesnt go out of bounds in the array
-			if (index < scrBottom && index > 0)
-			{
-				//move on the array of linked lists
-				index--;
-
-				//moves stored position of cursor upward 1 unit
-				posy = wherey() - 1;
-
-				if (index < scrBottom && index > 0)
+				else if (winner == 2)
 				{
-					gotoxy(posx, posy);
-				}
-				else {
-					index++;
+					// add 1 to bot score
+					botScore++;
 
-					//moves stored position of cursor downward 1 unit. This fixes the previous move if the paddle was moved out of bounds
-					posy = wherey() + 1;
+					// print "BOT SCORED !" 
+					system("CLS");
+					SetColor(0x0C);
+					PlaceCursor(0, 7);
+					printArt("bScore.txt");
+					cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n";
+					SetColor(10);
+					Sleep(1500);
+					//system("pause");
 				}
+				goto checkForVictory; // theres a better way to do this than using goto
 			}
-			break;
 
-			
-
-		default:
-			break;
 		}
 
-		myPlayer.setY(posy);
+		checkForVictory:
 
-		DisplayGame(posx, posy);
-
-		myBall.WinCondition(myPlayer, myBot);
+			// checking if victory condition has been met
+			if (playerScore == vict || botScore == vict)
+			{
+				system("CLS");
+				if (playerScore == vict)
+				{
+					SetColor(0xB0);
+					PlaceCursor(0, 11);
+					printArt("pWin.txt");
+					cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n";
+					SetColor(10);
+					sortLB();
+					//system("pause")
+					Sleep(3000);
+				}
+				else
+				{
+					SetColor(0xC0);
+					PlaceCursor(0, 3);
+					printArt("bWin.txt");
+					cout << "\n\n\n\n";
+					SetColor(10);
+					sortLB();
+					//system("pause");
+					Sleep(3000);
+				}
+				break;
+			}
 	}
 }
 
+int GameControl::checkWinCondition(Ball myBall)
+{
+	if (myBall.x == 0) // player scored
+	{
+		return 1;
+	}
+	if (myBall.x == 79) // computer scored
+	{
+		return 2;
+	}
+	else
+	{
+		return 0;
+	}
+}
 
-void GameControl::DisplayGame(int posx, int posy)
+// calls player, bot, and ball draw functions, prints game border and updates the scoreboard
+void GameControl::DisplayGame(Ball myBall, Player myPlayer, Bot myBot, int posx, int posy)
 {
 	system("CLS");
 
-	//start drawing player + bot which just moved
-	//start drawing ball which just moved
-	//draw border
-	//30 by 120
-}
+	//board size is 22 by 80 or 30 by 130
+	int x;
+	char ch = 176;
 
+	//start drawing player + bot which just moved
+	myPlayer.draw(79, myPlayer.getY());
+	myBot.draw(0, myBot.getY());
+
+	//start drawing ball which just moved
+	myBall.draw(posx, posy);
+
+	//top and bottom border
+	for (x = 0; x < 80; x++)
+	{
+		PlaceCursor(x, 22);
+		cout << ch;
+		PlaceCursor(x, 0);
+		cout << ch;
+	}
+
+	PlaceCursor(5, 0);
+	cout << " BOT SCORE: " << botScore << " " << endl;
+	PlaceCursor(58, 0);
+	cout << " PLAYER SCORE: " << playerScore << " " << endl;
+
+}
 
 
 //function to load the leaderboard, call this function at the beginning of every game to load the leaderboard list primarily and to show user potential goal to achieve
@@ -156,6 +332,8 @@ void GameControl::loadLeaderB()
 	int i = 0;
 
 	ifstream myFile(fileName);
+
+	cout << "\nPONG MASTER DELUXE SUPER TRIPLE DELUXE MASTER EDITION VOLUME 17 Leaderboard!:" << endl << endl << endl;
 
 	while (std::getline(myFile, line) && i < 13)
 	{
@@ -173,14 +351,16 @@ void GameControl::loadLeaderB()
 		i++;
 	}
 	myFile.close();
+
+	//system("pause");
 }
 
 void GameControl::options()
 {
 	int inp;
-	cout << "1. Change Difficulty" << endl;
+	cout << "\n1. Change Difficulty" << endl;
 	cout << "2. Amount of Points for Victory" << endl;
-	cout << "Press 9 to return to previous screen." << endl;
+	cout << "Press 9 to return to previous screen.\n" << endl;
 	cin >> inp;
 
 	
@@ -198,7 +378,7 @@ void GameControl::options()
 		else if (inp == 2)
 		{
 			cout << "Choose amount of Points to win." << endl;
-			cout << "Press 9 to return to previous screen." << endl;
+			cout << "Press 9 to return to previous screen.\n" << endl;
 
 			cin >> vict; 
 			
@@ -231,7 +411,7 @@ void GameControl::saveLeaderB()
 //call this function when game ends to input the new score
 void GameControl::sortLB()
 {
-	leaderboard[10] = score;
+	leaderboard[10] = playerScore;
 
 	//insertion sort algorithm to sort leaderboard and input the new score
 	int i, key, j;

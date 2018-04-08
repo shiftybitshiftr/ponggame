@@ -6,6 +6,7 @@
 #include <iostream>
 #include <windows.h>
 #include <stdlib.h>
+#include <fstream>
 
 using namespace std;
 
@@ -13,37 +14,36 @@ void gameTitle();
 void pongArt();
 void gameMenu(GameControl x);
 
+extern void SetColor(int);
 extern void PlaceCursor(const int x, const int y);
+extern void printArt(string fileName);
 
-extern void gotoxy(int x, int y);
-
-extern int wherex();
-
-extern int wherey();
+//extern void gotoxy(int x, int y);
+//extern int wherex();
+//extern int wherey();
 
 int main()
 {
-	//system("Pause");
 	GameControl GC;
+	system("pause");
 	gameTitle();
-	//pongArt();
+	pongArt();
 	gameMenu(GC);
 
-	system("Pause");
+	//system("Pause");
 	return 0;
 }
 
 void gameMenu(GameControl x)
 {
 	bool gameOn = true;
-	HANDLE hConsole;
-	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	int choice;
 
 	while (gameOn != false)
 	{
-		SetConsoleTextAttribute(hConsole, 10);
+		SetColor(10);
 		system("CLS");
+		system("mode 130");
 
 		PlaceCursor(30, 4);
 		cout << "PONG MASTER DELUXE SUPER TRIPLE DELUXE MASTER EDITION VOLUME 17" << endl;
@@ -105,32 +105,14 @@ extern void PlaceCursor(const int x, const int y)
 	return;
 }
 
-/*void pongArt()
+void pongArt()
 {
-	HANDLE  hConsole;
-	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(hConsole, 10);
+	SetColor(10);
 	system("CLS");
-
-	cout << "       PPPPPPPPPPPPPPPPP        OOOOOOOOO     NNNNNNNN        NNNNNNNN        GGGGGGGGGGGGG" << endl;
-	cout << "       P::::::::::::::::P     OO:::::::::OO   N:::::::N       N::::::N     GGG::::::::::::G" << endl;
-	cout << "       P::::::PPPPPP:::::P  OO:::::::::::: : OO N::::::::N      N::::::N   GGG::::::::::::G" << endl;
-	cout << "       PP:::::P     P:::::PO:::::::OOO:::::::ON:::::::::N     N::::::N  G:::::GGGGGGGG::::G" << endl;
-	cout << "         P::::P     P:::::PO::::::O   O::::::ON::::::::::N    N::::::N G:::::G       GGGGGG" << endl;
-	cout << "         P::::P     P:::::PO:::::O     O:::::ON:::::::::::N   N::::::NG:::::G              " << endl;
-	cout << "         P::::PPPPPP:::::P O:::::O     O:::::ON:::::::N::::N  N::::::NG:::::G              " << endl;
-	cout << "         P:::::::::::::PP  O:::::O     O:::::ON::::::N N::::N N::::::NG:::::G    GGGGGGGGGG" << endl;
-	cout << "         P::::PPPPPPPPP    O:::::O     O:::::ON::::::N  N::::N:::::::NG:::::G    G::::::::G" << endl;
-	cout << "         P::::P            O:::::O     O:::::ON::::::N   N:::::::::::NG:::::G    GGGGG::::G" << endl;
-	cout << "         P::::P            O:::::O     O:::::ON::::::N    N::::::::::NG:::::G        G::::G" << endl;
-	cout << "         P::::P            O::::::O   O::::::ON::::::N     N:::::::::N G:::::G       G::::G" << endl;
-	cout << "       PP::::::PP          O:::::::OOO:::::::ON::::::N      N::::::::N  G:::::GGGGGGGG::::G" << endl;
-	cout << "       P::::::::P           OO:::::::::::::OO N::::::N       N:::::::N   GG:::::::::::::::G" << endl;
-	cout << "       P::::::::P             OO:::::::::OO   N::::::N        N::::::N     GGG::::::GGG:::G" << endl;
-	cout << "       PPPPPPPPPP               OOOOOOOOO     NNNNNNNN         NNNNNNN        GGGGGG   GGGG" << endl;
-
+	PlaceCursor(0, 5);
+	printArt("pongArt.txt");
 	Sleep(1500);
-}*/
+}
 
 void gameTitle()
 {
@@ -146,7 +128,7 @@ void gameTitle()
 		// move our text around
 		PlaceCursor(k, k);
 		// pick the colorattribute k you want
-		SetConsoleTextAttribute(hConsole, k);
+		SetColor(k);
 		cout << "PONG MASTER DELUXE SUPER TRIPLE DELUXE MASTER EDITION VOLUME 17" << endl;
 		//}
 	}
@@ -155,7 +137,22 @@ void gameTitle()
 		// move our text around
 		PlaceCursor(k, k);
 		// pick the colorattribute k you want
-		SetConsoleTextAttribute(hConsole, k);
+		SetColor(k);
 		cout << "PONG MASTER DELUXE SUPER TRIPLE DELUXE MASTER EDITION VOLUME 17" << endl;
 	}
+}
+
+void SetColor(int value) // Wrapper function for windows set console color
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), value);
+}
+
+// Reads ASCII art from file and print
+void printArt(string fileName)
+{
+	std::ifstream f(fileName);
+
+	if (f.is_open())
+		cout << f.rdbuf();
+	cout << "\n";
 }

@@ -6,6 +6,7 @@ class Bot :
 	public Shape
 {
 	friend class Ball;
+	//friend class GameControl;
 public:
 	Bot();
 	~Bot();
@@ -18,9 +19,13 @@ public:
 
 	void tracking(int xCo, int yCo);
 
-	void collisionDetect(int xCo, int yCo);
+	void collisionDetect(int xCo, int yCo); // don't end up using this, it's all in moveBall
 
-	void moveBot(int yn);
+	void moveToY(int yn);                   // this used to be the move function, currently not using it
+
+	int getY();
+
+	void move(int ballX, int ballY, int ballDir); // just one difficulty. need to update logic for different difficulties, otherwise just go back to old difficulty settings of random movement.
 
 private:
 
