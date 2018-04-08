@@ -1,5 +1,6 @@
 #include "Bot.h"
 #include "GameControl.h"
+#include <windows.h>
 //#include "Source.cpp"
 
 using namespace std;
@@ -147,38 +148,52 @@ void Bot::move(int ballX, int ballY, int ballDir)
 		// ball is going < ^
 		if (ballDir == 3)
 		{
-			// if ball Y is less than our paddle Y
-			if (ballY < posY)
+			// if ball Y is less than our paddle Y and we're below upper bound
+			if (ballY < posY && posY > 2)
 			{
-				// we'll check for bounds of the board
-				// upper bound
-				if (posY > 2) 
-				{
-					// and move 3 spaces. adjust this for different difficulty settings.
-					posY -= 3;
-				}
-				// don't want to phase into the border (it still does though?)
-				else if (posY > 1)
-				{
-					posY -= 1;
-				}
+				// and move 2 spaces. adjust this for different difficulty settings.
+				posY -= 2;
+			}
+			// don't want to phase into the border
+			else if (posY > 2)
+			{
+				posY -= 1;
 			}
 		}
 		else if (ballDir == 4)
 		{
-			if (ballY > (posY + 3))
+			if (ballY > (posY + 3) && posY < 17)
 			{
-				// lower bound
-				if (posY < 16) 
-				{
-					posY += 3;
-				}
-				// don't want to phase into the border (it still does though?)
-				else if (posY < 18) 
-				{
+				
+					posY += 2;
+			}
+			// don't want to phase into the border
+			else if (posY < 18) 
+			{
 					posY += 1;
-				}
+			}
+		}
+		
+	}
+	// random movement when past half way point
+	else if (ballX >= 40)
+	{
+		if (ballDir == 2)
+		{
+			if (posY > 2 && posY < 16)
+			{
+				posY -= 2;
 
+				posY += 3;
+			}
+		}
+		else if (ballDir == 4)
+		{
+			if (posY > 2 && posY < 16)
+			{
+				posY -= 1;
+
+				posY += 3;
 			}
 		}
 	}

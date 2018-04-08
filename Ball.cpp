@@ -76,7 +76,7 @@ void Ball::moveBall(int playerCoord, int botCoord)
 	//}
 
 	// are we at the top?
-	if (y == 0)
+	if (y == 1)
 	{
 		// are we going up-right ^ >
 		if (direction == 1) 
