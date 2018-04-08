@@ -5,7 +5,6 @@
 #include <windows.h>
 
 using namespace std;
-//#include "Source.cpp"
 
 extern void PlaceCursor(const int x, const int y);
 
@@ -64,11 +63,11 @@ void Player::draw(int x, int y)
 
 void Player::movePlayer()
 {
-	/* multithreading no worky: 
+	/* multithreading issues: 
 	_beginthread can only accept a normal function pointer, not a pointer to class member, which means that Incoming must be either a regular function or a static class member
 	there are workarounds. figuring that out. 
 	
-	WORSE CASE: put it into a normal function?? make a setY?? */
+	WORST CASE: put it into a normal function?? make a setY?? */
 
 	//tick = 0;
 	////This is the handle to our thread that the system gives us when thread is created

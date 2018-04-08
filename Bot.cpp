@@ -1,7 +1,6 @@
 #include "Bot.h"
 #include "GameControl.h"
 #include <windows.h>
-//#include "Source.cpp"
 
 using namespace std;
 

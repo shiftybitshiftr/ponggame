@@ -1,6 +1,7 @@
 #include "GameControl.h"
 #include "Player.h"
 #include "Ball.h"
+
 #include <iostream>
 #include <Windows.h>
 #include <conio.h>
@@ -8,7 +9,6 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
-//#include "Source.cpp"
 
 using namespace std;
 
@@ -38,102 +38,6 @@ GameControl::~GameControl()
 
 void GameControl::start()
 {
-	//system("CLS");
-
-	//myBall.setXandY(60,15);
-		//22 by 80 is the shape of the box on Win7
-		//30 by 120 is shape of box on Win8-10
-
-	//values to ensure the paddle does not move offscreen
-	//int index=0;
-	//const int scrBottom = 45;
-
-	//values to catch position of cursor
-	//int posx = 0;
-	//int posy = 0;
-	//value to hold user input
-	//int input;
-	//boolean value to check whether end program button was pressed and exit program
-	//bool check = true;
-
-	//check user input
-	//input = _getch();
-	//one loop which calls the player move function and computer move function and display function
-	//while loop to continue running unless escape is pressed
-	//while (check == true)
-	//{
-	//	//checks that escape key was not pressed
-	//	if (input == 27)
-	//	{
-	//		break;
-	//	}
-
-	//	//switch statement to check what user input
-	//	switch (_getch()) {
-
-	//		//user pressed down arrow key
-	//	case 80:
-
-	//		//makes sure the cursor doesnt go out of bounds in the array
-	//		if (index < scrBottom && index > 0)
-	//		{
-	//			//move on the array of linked lists
-	//			index++;
-
-	//			//moves stored position of cursor downward 1 unit
-	//			posy = wherey() + 1;
-
-
-	//			if (index < scrBottom && index > 0)
-	//			{
-	//				gotoxy(posx, posy);
-	//			}
-	//			else {
-	//				index--;
-
-	//				//moves stored position of cursor downward 1 unit. This fixes the previous move if the paddle was moved out of bounds
-	//				posy = wherey() - 1;
-	//			}
-	//		}
-	//		break;
-
-	//		//user pressed up arrow key
-	//	case 72:
-	//		//makes sure the cursor doesnt go out of bounds in the array
-	//		if (index < scrBottom && index > 0)
-	//		{
-	//			//move on the array of linked lists
-	//			index--;
-
-	//			//moves stored position of cursor upward 1 unit
-	//			posy = wherey() - 1;
-
-	//			if (index < scrBottom && index > 0)
-	//			{
-	//				gotoxy(posx, posy);
-	//			}
-	//			else {
-	//				index++;
-
-	//				//moves stored position of cursor downward 1 unit. This fixes the previous move if the paddle was moved out of bounds
-	//				posy = wherey() + 1;
-	//			}
-	//		}
-	//		break;
-
-	//		
-
-	//	default:
-	//		break;
-	//	}
-
-	//	myPlayer.setY(posy);
-
-	//	DisplayGame(posx, posy);
-
-	//	myBall.WinCondition(myPlayer, myBot);
-	//}
-
 	const char paddle = 219;
 	const char ball = 254;
 	Ball *myBall = new Ball();
@@ -157,7 +61,6 @@ void GameControl::start()
 	SetColor(10);
 	cout << " wins!" << endl;
 	Sleep(1500);
-	//system("pause");
 
 	while (check == true)
 	{
@@ -184,13 +87,6 @@ void GameControl::start()
 
 		while (1)
 		{
-			// probably use these variables instead of directly calling inside each move function. it's hard to understand whats going on in there.
-			//int ballX = myBall.getX();
-			//int ballY = myBall.getY();
-			//int ballDir = myBall.getDir();
-			//int playerY = myPlayer.getY();
-			//int botY = myBot.getY();
-
 			// move player, ball, and bot
 			myPlayer->movePlayer();
 			myBot->move(myBall->getX(), myBall->getY(), myBall->getDir()); // passing position and direction of ball
@@ -206,8 +102,6 @@ void GameControl::start()
 
 			if (winner != 0) // triggered if some scored a point
 			{
-				//and here
-
 				if (winner == 1)
 				{
 					// add 1 to player score
@@ -220,7 +114,6 @@ void GameControl::start()
 					printArt("pScore.txt");
 					SetColor(10);
 					Sleep(1500);
-					//system("pause");
 				}
 				else if (winner == 2)
 				{
@@ -234,7 +127,6 @@ void GameControl::start()
 					printArt("bScore.txt");
 					SetColor(10);
 					Sleep(1500);
-					//system("pause");
 				}
 				goto checkForVictory; // theres a better way to do this than using goto
 			}
@@ -254,7 +146,6 @@ void GameControl::start()
 					printArt("pWin.txt");
 					SetColor(10);
 					sortLB();
-					//system("pause")
 					Sleep(3000);
 				}
 				else
@@ -264,7 +155,6 @@ void GameControl::start()
 					printArt("bWin.txt");
 					SetColor(10);
 					sortLB();
-					//system("pause");
 					Sleep(3000);
 				}
 				break;
@@ -367,8 +257,6 @@ void GameControl::loadLeaderB()
 		i++;
 	}
 	myFile.close();
-
-	//system("pause");
 }
 
 void GameControl::options()
@@ -451,27 +339,4 @@ void GameControl::sortLB()
 		}
 		leaderboard[j + 1] = key;
 	}
-}
-
-void GameControl::gotoxy(int x, int y) {
-
-	COORD pos = { x, y };
-
-	HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	SetConsoleCursorPosition(output, pos);
-
-}
-
-int GameControl::wherex()
-{
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-	return csbi.dwCursorPosition.X;
-}
-int GameControl::wherey()
-{
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-	return csbi.dwCursorPosition.Y;
 }

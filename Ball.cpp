@@ -1,6 +1,7 @@
 #include "Ball.h"
-//#include "Source.cpp"
+
 #include <iostream>
+
 using namespace std;
 
 extern void PlaceCursor(const int x, const int y);
@@ -15,20 +16,6 @@ Ball::~Ball()
 {
 }
 
-//int Ball::WinCondition(Player xPlayer, Bot xBot )
-//{
-//	
-//	if (x == 1 || x == 79)
-//	{
-//		if (xPlayer.y != y && (xPlayer.y)+1 != y && (xPlayer.y)+2 != y && (xPlayer.y)+3 != y)
-//		{
-//			return true;
-//		}
-//	}
-//	return false;
-//
-//}
-
 void Ball::draw(int xVal, int yVal)
 {
 	char ball = 254; 
@@ -37,44 +24,6 @@ void Ball::draw(int xVal, int yVal)
 }
 void Ball::moveBall(int playerCoord, int botCoord)
 {
-	//int Xcondition = 1;
-	//int Ycondition = 1;
-
-	//if (this->x == 1)
-	//{
-	//	Xcondition = 1;
-	//}
-	//else if (this->x == 79)
-	//{
-	//	Xcondition = 2;
-	//}
-	//else if (this->y == 1)
-	//{
-	//	Ycondition = 2;
-	//}
-	//else if (this->y == 19)
-	//{
-	//	Ycondition = 1;
-	//}
-	//switch (Ycondition)
-	//{
-	//case 1:
-	//	x++;
-	//	break;
-	//case 2:
-	//	x--;
-	//	break;
-	//}
-	//switch (Xcondition)
-	//{
-	//case 1:
-	//	y++;
-	//	break;
-	//case 2:
-	//	y--;
-	//	break;
-	//}
-
 	// are we at the top?
 	if (y == 1)
 	{

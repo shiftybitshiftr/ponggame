@@ -6,7 +6,7 @@ class Bot :
 	public Shape
 {
 	friend class Ball;
-	//friend class GameControl;
+
 public:
 	Bot();
 	~Bot();

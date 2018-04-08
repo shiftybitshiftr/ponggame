@@ -18,10 +18,6 @@ extern void SetColor(int);
 extern void PlaceCursor(const int x, const int y);
 extern void printArt(string fileName);
 
-//extern void gotoxy(int x, int y);
-//extern int wherex();
-//extern int wherey();
-
 int main()
 {
 	GameControl GC;
@@ -29,7 +25,6 @@ int main()
 	pongArt();
 	gameMenu(GC);
 
-	//system("Pause");
 	return 0;
 }
 
@@ -116,32 +111,23 @@ void pongArt()
 void gameTitle()
 {
 	int k;
-	HANDLE  hConsole;
-	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	for (k = 1; k < 500; k++)
 	{
-		//int n;
-		//for (n = 1; n < 10; n++)
-		//{
-		// move our text around
 		PlaceCursor(k, k);
-		// pick the colorattribute k you want
 		SetColor(k);
 		cout << "PONG MASTER DELUXE SUPER TRIPLE DELUXE MASTER EDITION VOLUME 17" << endl;
-		//}
 	}
 	for (k = 1; k < 100; k++)
 	{
-		// move our text around
 		PlaceCursor(k, k);
-		// pick the colorattribute k you want
 		SetColor(k);
 		cout << "PONG MASTER DELUXE SUPER TRIPLE DELUXE MASTER EDITION VOLUME 17" << endl;
 	}
 }
 
-void SetColor(int value) // Wrapper function for windows set console color
+// Wrapper function for windows set console color
+void SetColor(int value) 
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), value);
 }

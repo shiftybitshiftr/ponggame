@@ -1,7 +1,8 @@
-	#pragma once
-	#include "Shape.h"
+#pragma once
+#include "Shape.h"
 #include "Player.h"
 #include "Bot.h"
+
 	class Ball :
 		public Shape
 	{
@@ -24,11 +25,8 @@
 		int getY(); // returns y
 		int getDir(); // returns direction
 
-		//int WinCondition(Player x, Bot y);  // ended up putting this in GameControl
-
 	private:
 
-		//int prevX, prevY;
 		int direction;
 		int x, y;
 	};
