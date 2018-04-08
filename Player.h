@@ -12,11 +12,11 @@ public:
 	Player();
 	~Player();
 
-	int speed() { return 0; }
+	int speed() { return 0; } // didn't end up using this
 
 	void draw(int x, int y);
 
-	void collisionDetect(int xCo, int yCo); // don't end up using this, it's all in moveBall
+	void collisionDetect(int xCo, int yCo); // didn't end up using this, it's all in moveBall
 
 	void setY(int y);
 
@@ -28,14 +28,13 @@ public:
 
 	char getInput();
 
-
 	//static void inputThread(void *p_this);  // bugged
 	//void receiveInput();                    // bugged
 
 private:
 	int posX;
 	int posY;
-	int tick; // increment this for every movement
+	//int tick; // increment this for every movement (for multithreading)
 	char input; // holding player movement command UP or DOWN
 };
 

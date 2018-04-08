@@ -72,7 +72,7 @@ void Player::movePlayer()
 
 	//tick = 0;
 	////This is the handle to our thread that the system gives us when thread is created
-	//HANDLE myhandleA;
+	//HANDLE threadHandle;
 
 	////Creates our thread, pass static_run function and whole object as parameter
 	////See: https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/beginthread-beginthreadex
@@ -80,7 +80,7 @@ void Player::movePlayer()
 
 	////Waits until the our thread is in the signaled state or the time-out interval elapses
 	////See: https://msdn.microsoft.com/en-us/library/windows/desktop/ms687032(v=vs.85).aspx
-	//WaitForSingleObject(myhandleA, 50);
+	//WaitForSingleObject(threadHandle, 50);
 
 	//if (tick == 1)
 	//{
@@ -90,7 +90,7 @@ void Player::movePlayer()
 			this->input = _getch();
 			switch (this->input)
 			{
-				case 72:
+				case 72: // UP arrow
 					if (posY > 2)
 					{
 						posY -= 2;
@@ -100,7 +100,7 @@ void Player::movePlayer()
 						posY -= 1;
 					}
 					break;
-				case 80:
+				case 80: // DOWN arrow
 					if (posY < 17)
 					{
 						posY += 2;

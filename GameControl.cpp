@@ -140,10 +140,11 @@ void GameControl::start()
 	Player *myPlayer = new Player();
 	Bot *myBot = new Bot();
 
+	this->playerScore = 0;
+	this->botScore = 0;
+
 	//boolean value to check whether end program button was pressed and exit program
 	bool check = true;
-
-	int winner = 0, ballDir, ballX, ballY;
 
 	system("mode 80"); // ensure console width is large enough
 	system("CLS");
@@ -154,7 +155,7 @@ void GameControl::start()
 	SetColor(0x0D);
 	cout << vict;
 	SetColor(10);
-	cout << " wins!\n\n\n\n\n\n\n\n\n\n\n\n\n" << endl;
+	cout << " wins!" << endl;
 	Sleep(1500);
 	//system("pause");
 
@@ -167,6 +168,8 @@ void GameControl::start()
 			break;
 		}
 
+		int winner = 0, ballDir = 0, ballX = 0, ballY = 0;
+
 		srand(time(NULL)); 
 		ballDir = (rand() % 4) + 1; // seed for random ball starting direction
 
@@ -178,7 +181,6 @@ void GameControl::start()
 
 		myBall->setXandYandDir(ballX, ballY, ballDir);
 		DisplayGame(*myBall, *myPlayer, *myBot, ballX, ballY); // print game board
-		myPlayer->setInput(_getch()); // accept user input
 
 		while (1)
 		{
@@ -216,7 +218,6 @@ void GameControl::start()
 					SetColor(0x0B);
 					PlaceCursor(0, 7);
 					printArt("pScore.txt");
-					cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n";
 					SetColor(10);
 					Sleep(1500);
 					//system("pause");
@@ -231,7 +232,6 @@ void GameControl::start()
 					SetColor(0x0C);
 					PlaceCursor(0, 7);
 					printArt("bScore.txt");
-					cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n";
 					SetColor(10);
 					Sleep(1500);
 					//system("pause");
@@ -252,7 +252,6 @@ void GameControl::start()
 					SetColor(0xB0);
 					PlaceCursor(0, 11);
 					printArt("pWin.txt");
-					cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n";
 					SetColor(10);
 					sortLB();
 					//system("pause")
@@ -263,7 +262,6 @@ void GameControl::start()
 					SetColor(0xC0);
 					PlaceCursor(0, 3);
 					printArt("bWin.txt");
-					cout << "\n\n\n\n";
 					SetColor(10);
 					sortLB();
 					//system("pause");
@@ -295,10 +293,6 @@ void GameControl::DisplayGame(Ball myBall, Player myPlayer, Bot myBot, int posx,
 {
 	system("CLS");
 
-	//board size is 22 by 80 or 30 by 130
-	int x;
-	char ch = 176;
-
 	//start drawing player + bot which just moved
 	myPlayer.draw(79, myPlayer.getY());
 	myBot.draw(0, myBot.getY());
@@ -306,20 +300,42 @@ void GameControl::DisplayGame(Ball myBall, Player myPlayer, Bot myBot, int posx,
 	//start drawing ball which just moved
 	myBall.draw(posx, posy);
 
-	//top and bottom border
-	for (x = 0; x < 80; x++)
+	//top and bottom border, with spaces for the score cards
+	char ch = 176;
+	int x = 0;
+	while (x >= 0 && x < 5)
 	{
-		PlaceCursor(x, 22);
-		cout << ch;
 		PlaceCursor(x, 0);
+		cout << ch;
+		x++;
+	}
+	x = 19;
+	while (x > 18 && x < 58)
+	{
+		PlaceCursor(x, 0);
+		cout << ch;
+		x++;
+	}
+	x = 75;
+	while (x > 74 && x < 80)
+	{
+		PlaceCursor(x, 0);
+		cout << ch;
+		x++;
+	}
+	for (int x2 = 0; x2 < 80; x2++)
+	{
+		PlaceCursor(x2, 22);
 		cout << ch;
 	}
 
+	//current score cards
+	SetColor(0xA0);
 	PlaceCursor(5, 0);
 	cout << " BOT SCORE: " << botScore << " " << endl;
 	PlaceCursor(58, 0);
 	cout << " PLAYER SCORE: " << playerScore << " " << endl;
-
+	SetColor(10);
 }
 
 
