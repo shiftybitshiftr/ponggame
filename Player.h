@@ -20,11 +20,14 @@ public:
 
 	void setY(int y);
 
+	void setInput(char in);
+
 	void movePlayer();
 
 	int getY();
 
-	void setInput(char in);
+	char getInput();
+
 
 	//static void inputThread(void *p_this);  // bugged
 	//void receiveInput();                    // bugged

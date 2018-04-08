@@ -142,7 +142,6 @@ void GameControl::start()
 
 	//boolean value to check whether end program button was pressed and exit program
 	bool check = true;
-	char checkKey = 0;
 
 	int winner = 0, ballDir, ballX, ballY;
 
@@ -161,12 +160,12 @@ void GameControl::start()
 
 	while (check == true)
 	{
-		//checkKey = _getch();
-		////checks if escape key was pressed
-		//if (checkKey == 27)
-		//{
-		//	break;
-		//}
+		//checks if escape key was pressed
+		if (myPlayer->getInput() == 27)
+		{
+			check = false;
+			break;
+		}
 
 		srand(time(NULL)); 
 		ballDir = (rand() % 4) + 1; // seed for random ball starting direction

@@ -32,6 +32,11 @@ void Player::setInput(char in)
 	input = in;
 }
 
+char Player::getInput()
+{
+	return input;
+}
+
 int Player::getY()
 {
 	return posY;
