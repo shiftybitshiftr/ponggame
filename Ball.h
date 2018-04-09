@@ -11,13 +11,9 @@
 		Ball();
 		~Ball();
 
-		int speed() { return 0; } // dont think we end up using this
-
 		void draw(int x, int y);
 
-		void collisionDetect(int xCo, int yCo) { } // collision detection ended up getting written inside moveBall, this is empty
-
-		void moveBall(int playerCoord, int botCoord); // moves ball, takes in player Y and bot Y for collision detection
+		void move(int playerCoord, int botCoord); // moves ball, takes in player Y and bot Y for collision detection
 
 		void setXandYandDir(int xVal, int yVal, int dirVal);
 
@@ -25,6 +21,8 @@
 		int getY(); // returns y
 		int getDir(); // returns direction
 
+		//int speed() { return 0; }
+		//void collisionDetect(int xCo, int yCo) { } 
 	private:
 
 		int direction;

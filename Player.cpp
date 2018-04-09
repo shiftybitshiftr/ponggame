@@ -21,11 +21,6 @@ Player::~Player()
 {
 }
 
-void Player::collisionDetect(int xCo, int yCo)
-{
-
-}
-
 void Player::setInput(char in)
 {
 	input = in;
@@ -61,7 +56,7 @@ void Player::draw(int x, int y)
 
 }
 
-void Player::movePlayer()
+void Player::move()
 {
 	/* multithreading issues: 
 	_beginthread can only accept a normal function pointer, not a pointer to class member, which means that Incoming must be either a regular function or a static class member

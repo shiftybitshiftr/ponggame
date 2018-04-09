@@ -64,13 +64,6 @@ void GameControl::start()
 
 	while (check == true)
 	{
-		//checks if escape key was pressed
-		if (myPlayer->getInput() == 27)
-		{
-			check = false;
-			break;
-		}
-
 		int winner = 0, ballDir = 0, ballX = 0, ballY = 0;
 
 		srand(time(NULL)); 
@@ -87,10 +80,21 @@ void GameControl::start()
 
 		while (1)
 		{
+			//checks if escape key was pressed
+			if (myPlayer->getInput() == 27)
+			{
+				delete myBall;
+				delete myPlayer;
+				delete myBot;
+
+				check = false;
+				break;
+			}
+
 			// move player, ball, and bot
-			myPlayer->movePlayer();
+			myPlayer->move();
 			myBot->move(myBall->getX(), myBall->getY(), myBall->getDir()); // passing position and direction of ball
-			myBall->moveBall(myPlayer->getY(), myBot->getY());             // passing position of player and bot
+			myBall->move(myPlayer->getY(), myBot->getY());             // passing position of player and bot
 
 			// print updated positions
 			DisplayGame(*myBall, *myPlayer, *myBot, ballX, ballY);
@@ -128,7 +132,7 @@ void GameControl::start()
 					SetColor(10);
 					Sleep(1500);
 				}
-				goto checkForVictory; // theres a better way to do this than using goto
+				goto checkForVictory; // break out of nested loop to see if any has reached number of points for victory
 			}
 
 		}
@@ -157,6 +161,11 @@ void GameControl::start()
 					sortLB();
 					Sleep(3000);
 				}
+
+				delete myBall;
+				delete myPlayer;
+				delete myBot;
+
 				break;
 			}
 	}
@@ -277,7 +286,7 @@ void GameControl::options()
 			cout << inp << " is the new difficulty for the game." <<endl;
 			Sleep(2500);
 
-			bender.difficulty(inp);
+			//myBot.difficulty(inp);
 		}
 		else if (inp == 2)
 		{

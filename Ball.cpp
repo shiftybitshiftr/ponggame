@@ -22,7 +22,7 @@ void Ball::draw(int xVal, int yVal)
 	PlaceCursor(x, y);
 	cout << ball;
 }
-void Ball::moveBall(int playerCoord, int botCoord)
+void Ball::move(int playerCoord, int botCoord)
 {
 	// are we at the top?
 	if (y == 1)
@@ -34,7 +34,7 @@ void Ball::moveBall(int playerCoord, int botCoord)
 			y++;
 			x++;
 			direction = 2;
-			goto paddleCheck; // there's a better way than using gotos
+			goto paddleCheck; // break out of nested loop to see if we've hit a paddle
 		}
 		// are we going up-left < ^
 		else if (direction == 3) 

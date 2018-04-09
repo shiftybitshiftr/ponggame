@@ -26,10 +26,11 @@ public:
 
 private:
 	char board[30][120];
-	Bot bender;
 	int vict;
 	int playerScore;
 	int botScore;
 	int leaderboard[11];
+
+	//Bot myBot;
 };
 

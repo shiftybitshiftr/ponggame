@@ -10,10 +10,12 @@
 
 using namespace std;
 
+// Function prototypes
 void gameTitle();
 void pongArt();
 void gameMenu(GameControl x);
 
+// Externs used in all classes
 extern void SetColor(int);
 extern void PlaceCursor(const int x, const int y);
 extern void printArt(string fileName);
@@ -21,6 +23,7 @@ extern void printArt(string fileName);
 int main()
 {
 	GameControl GC;
+
 	gameTitle();
 	pongArt();
 	gameMenu(GC);
@@ -28,6 +31,7 @@ int main()
 	return 0;
 }
 
+// loads the main menu by passing an object of GameControl
 void gameMenu(GameControl x)
 {
 	bool gameOn = true;
@@ -74,7 +78,6 @@ void gameMenu(GameControl x)
 		else if (choice == 1)
 		{
 			x.start();
-			system("Pause");
 		}
 
 		
@@ -86,6 +89,7 @@ void gameMenu(GameControl x)
 
 }
 
+// Wrapper function for windows set console cursor position
 extern void PlaceCursor(const int x, const int y)
 {
 
@@ -99,6 +103,7 @@ extern void PlaceCursor(const int x, const int y)
 	return;
 }
 
+// set color and move cursor, then print our "PONG" ASCII art
 void pongArt()
 {
 	SetColor(10);
@@ -108,6 +113,7 @@ void pongArt()
 	Sleep(1500);
 }
 
+// cycle through all console colors and positions and display glitch art
 void gameTitle()
 {
 	int k;

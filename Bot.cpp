@@ -36,11 +36,6 @@ void Bot::draw(int x, int y)
 	cout << paddle << endl;
 }
 
-int Bot::speed()
-{
-	return 0;
-}
-
 void Bot::difficulty(int a) //Set movement patterns for bot difficulty
 {
 	//Default difficulty of 1
@@ -109,16 +104,6 @@ void Bot::difficulty(int a) //Set movement patterns for bot difficulty
 		cout << "Please choose a Difficulty between 1 and 4\n";
 		//options();
 		}
-}
-
-void Bot::tracking(int x, int y)
-{
-	
-}
-
-void Bot::collisionDetect(int xCo, int yCo)
-{
-
 }
 
 void Bot::moveToY(int yn)
