@@ -22,6 +22,7 @@ GameControl::GameControl()
 	vict = 3;
 	playerScore = 0;
 	botScore = 0;
+	difficulty = 2;
 
 	for (int i = 0; i < 11;i++)
 	{
@@ -93,7 +94,7 @@ void GameControl::start()
 
 			// move player, ball, and bot
 			myPlayer->move();
-			myBot->move(myBall->getX(), myBall->getY(), myBall->getDir()); // passing position and direction of ball
+			myBot->move(myBall->getX(), myBall->getY(), myBall->getDir(), this->difficulty); // passing position and direction of ball
 			myBall->move(myPlayer->getY(), myBot->getY());             // passing position of player and bot
 
 			// print updated positions
@@ -279,14 +280,22 @@ void GameControl::options()
 	
 		if (inp == 1)
 		{
-			cout << "Choose difficulty 1 through 4" << endl;
-			cout << "Press 9 to return to previous screen." << endl;
+			cout << "Choose difficulty 1 through 4." << endl;
+			cout << "1. BEGINNER  2. INTERMEDIATE  3. CHALLENGING  4. INSANE" << endl;
+			cout << "Press 9 to return to previous screen.\n" << endl;
 			cin >> inp;
 
-			cout << inp << " is the new difficulty for the game." <<endl;
-			Sleep(2500);
-
-			//myBot.difficulty(inp);
+			if (inp <= 4)
+			{
+				cout << inp << " is the new difficulty for the game." << endl;
+				Sleep(2500);
+				this->difficulty = inp;
+			}
+			else
+			{
+				cout << "Invalid difficulty setting.\nReturning to main menu." << endl;
+				Sleep(2500);
+			}
 		}
 		else if (inp == 2)
 		{

@@ -19,7 +19,7 @@ public:
 
 	int getY();
 
-	void move(int ballX, int ballY, int ballDir); 
+	void move(int ballX, int ballY, int ballDir, int difficulty); 
 	
     //void collisionDetect(int xCo, int yCo); // it's all in moveBall
 	//void tracking(int xCo, int yCo);

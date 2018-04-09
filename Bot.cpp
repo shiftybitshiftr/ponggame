@@ -125,9 +125,29 @@ void Bot::moveToY(int yn)
 	posY = y;
 }
 
-void Bot::move(int ballX, int ballY, int ballDir)
+void Bot::move(int ballX, int ballY, int ballDir, int difficulty)
 {
-	if (ballX <= 39) // half way across the board check. maybe adjust this for different difficulty settings.
+	int boardcheck = 0;
+
+	if (difficulty == 1)
+	{ 
+		boardcheck = 11;
+	}
+	else if (difficulty == 2)
+	{
+		boardcheck = 21;
+	}
+	else if (difficulty == 3)
+	{
+		boardcheck = 33;
+	}
+	else if (difficulty == 4)
+	{
+		boardcheck = 41;
+	}
+
+
+	if (ballX <= boardcheck) // half way across the board check. maybe adjust this for different difficulty settings.
 	{
 		// ball is going < ^
 		if (ballDir == 3)
@@ -160,11 +180,11 @@ void Bot::move(int ballX, int ballY, int ballDir)
 		
 	}
 	// random movement when past half way point
-	else if (ballX >= 40)
+	else if (ballX >= (boardcheck +1))
 	{
 		if (ballDir == 2)
 		{
-			if (posY > 2 && posY < 16)
+			if (posY > 2 && posY < 17)
 			{
 				posY -= 2;
 
@@ -173,7 +193,7 @@ void Bot::move(int ballX, int ballY, int ballDir)
 		}
 		else if (ballDir == 4)
 		{
-			if (posY > 2 && posY < 16)
+			if (posY > 2 && posY < 17)
 			{
 				posY -= 1;
 

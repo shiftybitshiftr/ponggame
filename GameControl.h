@@ -30,7 +30,6 @@ private:
 	int playerScore;
 	int botScore;
 	int leaderboard[11];
-
-	//Bot myBot;
+	int difficulty;
 };
 
