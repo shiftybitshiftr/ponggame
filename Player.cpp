@@ -81,30 +81,33 @@ void Player::move()
 		// 72 is up, 80 is down
 		//if (this->input == 0xE0) // nothing in input yet
 		//{
+		if (_kbhit())
+		{
 			this->input = _getch();
 			switch (this->input)
 			{
-				case 72: // UP arrow
-					if (posY > 2)
-					{
-						posY -= 2;
-					}
-					else if (posY > 1)
-					{
-						posY -= 1;
-					}
-					break;
-				case 80: // DOWN arrow
-					if (posY < 17)
-					{
-						posY += 2;
-					}
-					else if (posY < 18)
-					{
-						posY += 1;
-					}
-					break;
+			case 72: // UP arrow
+				if (posY > 2)
+				{
+					posY -= 2;
+				}
+				else if (posY > 1)
+				{
+					posY -= 1;
+				}
+				break;
+			case 80: // DOWN arrow
+				if (posY < 17)
+				{
+					posY += 2;
+				}
+				else if (posY < 18)
+				{
+					posY += 1;
+				}
+				break;
 			}
+		}
 		//}
 	//}
 }
